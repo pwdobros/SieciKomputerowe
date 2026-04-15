@@ -1,9 +1,3 @@
-# Sprawozdanie z laboratorium: Podstawowe operacje sieciowe
-Data wykonania: 2026-03-25
-Termin oddania: 2026-04-08
-
----
-
 ### Zadanie 1: Wykaz interfejsów sieciowych i ich statusów
 Wyświetlenie uproszczonej listy interfejsów w celu weryfikacji ich stanu (UP/DOWN).
 

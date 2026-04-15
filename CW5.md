@@ -11,6 +11,7 @@ Wyświetlenie uproszczonej listy interfejsów w celu weryfikacji ich stanu (UP/D
 ip -br link
 
 **Wynik:**
+```text
 lo                UNKNOWN        00:00:00:00:00:00 <LOOPBACK,UP,LOWER_UP> 
 enp0s31f6         UP             cc:96:e5:0c:83:57 <BROADCAST,MULTICAST,UP,LOWER_UP> 
 virbr0            DOWN           52:54:00:f8:3b:b7 <NO-CARRIER,BROADCAST,MULTICAST,UP> 
@@ -34,7 +35,7 @@ veth913961f@if2   UP             7e:d8:e6:e3:3c:1c <BROADCAST,MULTICAST,UP,LOWER
 veth246ea98@if2   UP             e6:a2:6e:c8:c6:26 <BROADCAST,MULTICAST,UP,LOWER_UP> 
 vethe17a9a5@if2   UP             1a:87:72:69:30:d5 <BROADCAST,MULTICAST,UP,LOWER_UP> 
 veth7b7d429@if2   UP             ba:ff:96:46:38:b3 <BROADCAST,MULTICAST,UP,LOWER_UP> 
-
+```
 ---
 
 ### Zadanie 2: Adres fizyczny (MAC) routera domyślnego
@@ -44,19 +45,21 @@ Identyfikacja adresu MAC urządzenia pełniącego rolę bramy sieciowej.
 arp -a
 
 **Wynik:**
+```text
 _gateway (192.168.48.1) at d4:76:a0:e4:71:ef [ether] on enp0s31f6
 (Wpis dla bramy domyślnej zidentyfikowany po etykiecie _gateway)
-
+```
 ---
 
 ### Zadanie 3: Procedura zmiany adresu MAC
 Czynność mająca na celu zmianę identyfikatora sprzętowego karty sieciowej.
 
 **Polecenie:**
+```text
 sudo ip link set dev eth0 down
 sudo ip link set dev eth0 address 00:11:22:33:44:55
 sudo ip link set dev eth0 up
-
+```
 **Status weryfikacji:**
 nie zmienilem
 
@@ -69,6 +72,7 @@ Wykrywanie aktywnych maszyn w lokalnym segmencie sieciowym.
 nmap -sn 192.168.48.255/24
 
 **Wynik:**
+```text
 Starting Nmap 7.94SVN ( https://nmap.org ) at 2026-03-25 11:54 CET
 Nmap scan report for 192.168.48.2
 Host is up (0.0021s latency).
@@ -89,7 +93,7 @@ Host is up (0.00045s latency).
 Nmap scan report for 192.168.48.90
 Host is up (0.00054s latency).
 Nmap done: 256 IP addresses (9 hosts up) scanned in 2.32 seconds
-
+```
 ---
 
 ### Zadanie 5: Skanowanie podsieci pod kątem usługi SSH (port 22)
@@ -99,6 +103,7 @@ Wyszukiwanie maszyn z otwartym portem komunikacyjnym 22.
 nmap -p 22 --open 192.168.48.0/24
 
 **Wynik:**
+```text
 Starting Nmap 7.94SVN ( https://nmap.org ) at 2026-03-25 11:56 CET
 Nmap scan report for 192.168.48.2
 Host is up (0.00093s latency).
@@ -106,7 +111,7 @@ PORT   STATE SERVICE
 22/tcp open  ssh
 ... (wyniki powtarzalne dla hostów .72, .77, .79, .81, .84, .85, .87, .90)
 Nmap done: 256 IP addresses (9 hosts up) scanned in 2.32 seconds
-
+```
 ---
 
 ### Zadanie 6: Analiza wszystkich portów interfejsu loopback
@@ -116,6 +121,7 @@ Sprawdzenie lokalnie uruchomionych usług na interfejsie zwrotnym.
 nmap -p- 127.0.0.1
 
 **Wynik:**
+```text
 Starting Nmap 7.94SVN ( https://nmap.org ) at 2026-03-25 11:51 CET
 Nmap scan report for localhost (127.0.0.1)
 Host is up (0.000039s latency).
@@ -131,7 +137,7 @@ PORT      STATE SERVICE
 8082/tcp  open  blackice-alerts
 11434/tcp open  unknown
 27017/tcp open  mongod
-
+```
 ---
 
 ### Zadanie 7: Identyfikacja portów, procesów i nazw programów
@@ -141,6 +147,7 @@ Szczegółowa lista nasłuchujących połączeń TCP/UDP.
 sudo netstat -tulnp
 
 **Wynik (wybrane wpisy):**
+```text
 Proto Recv-Q Send-Q Local Address           State       PID/Program name    
 tcp        0      0 0.0.0.0:3000            LISTEN      4809/docker-proxy   
 tcp        0      0 127.0.0.1:5432          LISTEN      2596/postgres       
@@ -148,7 +155,7 @@ tcp        0      0 127.0.0.53:53           LISTEN      1175/systemd-resolv
 tcp        0      0 0.0.0.0:22              LISTEN      1/init              
 tcp        0      0 127.0.0.1:11434         LISTEN      3039/ollama         
 tcp        0      0 127.0.0.1:27017         LISTEN      3552/mongod         
-
+```
 ---
 
 ### Zadanie 8: Wyświetlenie trasy domyślnej
@@ -184,10 +191,11 @@ Sprawdzenie pliku konfiguracyjnego resolvera.
 cat /etc/resolv.conf
 
 **Wynik:**
+```text
 nameserver 127.0.0.53
 options edns0 trust-ad
 search .
-
+```
 ---
 
 ### Zadanie 11: Statyczne wpisy w pliku hosts
@@ -197,10 +205,11 @@ Weryfikacja lokalnej bazy mapowania nazw na adresy IP.
 cat /etc/hosts
 
 **Wynik:**
+```text
 127.0.0.1 localhost
 127.0.1.1 user-Precision-3460
 ::1     ip6-localhost ip6-loopback
-
+```
 ---
 
 ### Zadanie 12: Zapytanie o rekordy MX przez zewnętrzny serwer DNS
@@ -210,9 +219,10 @@ Wykorzystanie serwera 8.8.8.8 do odpytania o rekordy pocztowe domeny.
 dig MX kosmatka.pl @8.8.8.8 +short
 
 **Wynik:**
+```text
 10 mx2.privateemail.com.
 10 mx1.privateemail.com.
-
+```
 ---
 
 ### Zadanie 13: Sprawdzenie adresu IPv6 dla domeny google.pl
@@ -233,10 +243,11 @@ Sprawdzenie dat ważności i rejestracji domeny.
 whois kosmatka.pl
 
 **Wynik:**
+```text
 created:                        2022.12.02 12:27:10
 last modified:                  2022.12.02 12:33:53
 renewal date:                   2032.12.02 12:27:10
-
+```
 ---
 
 ### Zadanie 15: Lokalizacja listy usuniętych domen .pl
